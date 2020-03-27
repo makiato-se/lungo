@@ -19,30 +19,21 @@ func NewLanguageHandler(repository persistance.LanguageRepository) LanguageHandl
 func (handler *LanguageHandler) Get(writer http.ResponseWriter, request *http.Request) {
 	query := request.URL.Query()
 	language := query.Get("language")
-
-	if language == "spanish" {
-		words, err := json.Marshal(handler.repository.GetWordsForLanguage(language))
-		if err != nil {
-			panic(err)
-		}
-		_, err = writer.Write(words)
-		if err != nil {
-			panic(err)
-		}
-		return
-	}
-
-	if language == "french" {
-		_, err := writer.Write([]byte("Bonjour monsieur!"))
-		if err != nil {
-			panic(err)
-		}
-		return
-	}
-
-	writer.WriteHeader(404)
-	_, err := writer.Write([]byte("Not Found"))
+	wordList := handler.repository.GetWordsForLanguage(language)
+	
+	words, err := json.Marshal(wordList)
 	if err != nil {
 		panic(err)
 	}
+	_, err = writer.Write(words)
+	if err != nil {
+		panic(err)
+	}
+	return
+
+	/*writer.WriteHeader(404)
+	_, err = writer.Write([]byte("Not Found"))
+	if err != nil {
+		panic(err)
+	}*/
 }
