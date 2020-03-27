@@ -10,20 +10,20 @@ import (
 
 
 func main() {
-	handlers := initHandlers()
+	httpHandlers := initHandlers()
 	r := mux.NewRouter()
-	r.HandleFunc("/", handlers.Home.Get)
+	r.HandleFunc("/", httpHandlers.Language.Get)
 
 	fmt.Println("\n - 🚀 Application launched @ http://:8080")
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
 
 type Handlers struct {
-	Home handlers.LanguageHandler
+	Language handlers.LanguageHandler
 }
 
 func initHandlers() Handlers {
 	return Handlers{
-		Home: handlers.LanguageHandler{},
+		Language: handlers.LanguageHandler{},
 	}
 }
