@@ -8,9 +8,6 @@ import (
 	"fmt"
 )
 
-type Handlers struct {
-	Home pkg.HomeHandler
-}
 
 func main() {
 	handlers := initHandlers()
@@ -21,8 +18,12 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
 
+type Handlers struct {
+	Home pkg.LanguageHandler
+}
+
 func initHandlers() Handlers {
 	return Handlers{
-		Home: pkg.HomeHandler{},
+		Home: pkg.LanguageHandler{},
 	}
 }
