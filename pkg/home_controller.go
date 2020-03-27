@@ -2,11 +2,11 @@ package pkg
 
 import "net/http"
 
-type Handler struct {
+type HomeHandler struct {
 
 }
 
-func (handler *Handler) Get(writer http.ResponseWriter, request *http.Request) {
+func (handler *HomeHandler) Get(writer http.ResponseWriter, request *http.Request) {
 	_, err := writer.Write([]byte("Hello World!"))
 	if err != nil {
 		panic(err)
