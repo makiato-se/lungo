@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/gorilla/mux"
 	"log"
-	"lungo/pkg"
+	"lungo/handlers"
 	"net/http"
 	"fmt"
 )
@@ -19,11 +19,11 @@ func main() {
 }
 
 type Handlers struct {
-	Home pkg.LanguageHandler
+	Home handlers.LanguageHandler
 }
 
 func initHandlers() Handlers {
 	return Handlers{
-		Home: pkg.LanguageHandler{},
+		Home: handlers.LanguageHandler{},
 	}
 }
