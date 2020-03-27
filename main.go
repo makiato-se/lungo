@@ -19,11 +19,11 @@ func main() {
 }
 
 type Handlers struct {
-	Home pkg.HomeHandler
+	Home pkg.LanguageHandler
 }
 
 func initHandlers() Handlers {
 	return Handlers{
-		Home: pkg.HomeHandler{},
+		Home: pkg.LanguageHandler{},
 	}
 }
