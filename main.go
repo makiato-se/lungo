@@ -8,7 +8,6 @@ import (
 	"fmt"
 )
 
-
 func main() {
 	handlers := initHandlers()
 	r := mux.NewRouter()
