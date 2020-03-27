@@ -3,26 +3,26 @@ package main
 import (
 	"github.com/gorilla/mux"
 	"log"
-	"lungo/pkg"
+	"lungo/handlers"
 	"net/http"
 	"fmt"
 )
 
 func main() {
-	handlers := initHandlers()
+	httpHandlers := initHandlers()
 	r := mux.NewRouter()
-	r.HandleFunc("/", handlers.Home.Get)
+	r.HandleFunc("/", httpHandlers.Language.Get)
 
 	fmt.Println("\n - 🚀 Application launched @ http://:8080")
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
 
 type Handlers struct {
-	Home pkg.LanguageHandler
+	Language handlers.LanguageHandler
 }
 
 func initHandlers() Handlers {
 	return Handlers{
-		Home: pkg.LanguageHandler{},
+		Language: handlers.LanguageHandler{},
 	}
 }
