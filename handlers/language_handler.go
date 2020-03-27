@@ -1,9 +1,19 @@
 package handlers
 
-import "net/http"
+import (
+	"encoding/json"
+	"lungo/persistance"
+	"net/http"
+)
 
 type LanguageHandler struct {
-	Db int
+	repository persistance.LanguageRepository
+}
+
+func NewLanguageHandler(repository persistance.LanguageRepository) LanguageHandler {
+	return LanguageHandler{
+		repository: repository,
+	}
 }
 
 func (handler *LanguageHandler) Get(writer http.ResponseWriter, request *http.Request) {
@@ -11,7 +21,11 @@ func (handler *LanguageHandler) Get(writer http.ResponseWriter, request *http.Re
 	language := query.Get("language")
 
 	if language == "spanish" {
-		_, err := writer.Write([]byte("Hola señor!"))
+		words, err := json.Marshal(handler.repository.GetWordsForLanguage(language))
+		if err != nil {
+			panic(err)
+		}
+		_, err = writer.Write(words)
 		if err != nil {
 			panic(err)
 		}

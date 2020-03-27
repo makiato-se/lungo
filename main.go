@@ -1,13 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gorilla/mux"
 	"log"
 	"lungo/handlers"
+	"lungo/persistance"
 	"net/http"
-	"fmt"
 )
-
 
 func main() {
 	httpHandlers := initHandlers()
@@ -24,6 +24,6 @@ type Handlers struct {
 
 func initHandlers() Handlers {
 	return Handlers{
-		Language: handlers.LanguageHandler{},
+		Language: handlers.NewLanguageHandler(persistance.LanguageRepository{}),
 	}
 }
