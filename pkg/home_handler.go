@@ -3,7 +3,7 @@ package pkg
 import "net/http"
 
 type HomeHandler struct {
-
+	Db int
 }
 
 func (handler *HomeHandler) Get(writer http.ResponseWriter, request *http.Request) {
