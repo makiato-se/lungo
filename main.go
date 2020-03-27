@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	gorilla_handlers "github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"log"
 	"lungo/handlers"
@@ -12,10 +13,11 @@ import (
 func main() {
 	httpHandlers := initHandlers()
 	r := mux.NewRouter()
+
 	r.HandleFunc("/", httpHandlers.Language.Get)
 
 	fmt.Println("\n - 🚀 Application launched @ http://:8080")
-	log.Fatal(http.ListenAndServe(":8080", r))
+	log.Fatal(http.ListenAndServe(":8080", gorilla_handlers.RecoveryHandler()(r)))
 }
 
 type Handlers struct {

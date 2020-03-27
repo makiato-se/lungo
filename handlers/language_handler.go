@@ -20,7 +20,7 @@ func (handler *LanguageHandler) Get(writer http.ResponseWriter, request *http.Re
 	query := request.URL.Query()
 	language := query.Get("language")
 	wordList := handler.repository.GetWordsForLanguage(language)
-	
+
 	words, err := json.Marshal(wordList)
 	if err != nil {
 		panic(err)
